@@ -5,10 +5,10 @@
     align-items: center;
     padding: 0.7rem 2rem;
     z-index: 1;
-    height: 5%;
+    height: 7.5%;
     width: 100%;
     opacity: 0.9;
-    background-color: #17a2b8;
+    background-color: #000;
   }
   
   .navbar ul {
@@ -22,5 +22,15 @@
   }
   
   .navbar a:hover {
-    color: black;
+    color: #0081cf;
+  }
+
+  li.logout{
+    display: flex;
+    align-items: center;
+    color: #fff;
+  }
+
+  li.logout i svg path{
+    color: #fff;
   }

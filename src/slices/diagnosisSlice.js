@@ -53,9 +53,6 @@ export const diagnosisSlice = createSlice({
       })
       .addCase(getSymptoms.fulfilled, (state, action) => {
         state.isLoading = false;
-        /* const startIndex = action.payload.indexOf('[');
-        const symptomArrayString = action.payload.substring(startIndex);
-        const symptomsList = JSON.parse(symptomArrayString); */
         state.symptoms = action.payload;
         console.log(state.symptoms);
       })
@@ -72,14 +69,13 @@ export const diagnosisSlice = createSlice({
         console.log(action.payload);
         state.diagnosis = action.payload;
       })
-      .addCase(getDiagnosis.rejected, (state, action) => {
+      .addCase(getDiagnosis.rejected, (state) => {
         state.isLoading = false;
         state.diagnosis = null;
       });
   },
 });
 
-// Action creators are generated for each case reducer function
 export const {} = diagnosisSlice.actions;
 
 export default diagnosisSlice.reducer;

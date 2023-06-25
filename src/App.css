@@ -11,3 +11,23 @@
     height: 100vh;
 }
 
+.button{
+    width: 120px;
+    border-radius: 15px;
+    height: 35px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+}
+
+h1{
+    font-weight: 700 !important;
+    font-size: 20px !important;
+}
+
+span{
+    color: #0081cf;
+}

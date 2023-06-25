@@ -1,10 +1,17 @@
 import React, { Fragment } from 'react'
 import '../../styles/UI/Navbar.css'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from '../../slices/authSlice'
 import { Link } from 'react-router-dom'
+import { GrLogout } from 'react-icons/gr'
 
 function Navbar() {
   const { isAuthenticated } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  
+  const logout = () => {
+    dispatch(logoutUser());
+  };
 
   const authLinks = (
     <ul>
@@ -15,7 +22,11 @@ function Navbar() {
       <li>
         <Link to="/diagnose">Diagnose</Link>
       </li>      
-    </ul>
+    <li className='logout'>
+    <i><GrLogout/></i>
+    <button onClick={logout}>Logout</button>
+    </li>      
+  </ul>
   )
 
 

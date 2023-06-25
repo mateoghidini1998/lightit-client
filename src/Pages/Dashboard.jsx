@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/Pages/Dashboard.css';
-import { logoutUser } from '../slices/authSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDiagnosis, getSymptoms } from '../slices/diagnosisSlice';
+import IssueContainer from '../components/Diagnosis/IssueContainer'
 
 function Dashboard() {
   const dispatch = useDispatch();
@@ -22,24 +22,17 @@ function Dashboard() {
     dispatch(getSymptoms());
   }, [])
 
-  const logout = () => {
-    dispatch(logoutUser());
-  };
-
-  const yearOfBirth = user && user.birth_date;
-  const gender = user && user.gender;
-  console.log(yearOfBirth, gender, formData.symptom)
-
   const onSubmitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
     dispatch(getDiagnosis({symptoms: [formData.symptom]}))
   } 
+
  
   return (
     <div className="dashboard-container">  
-      <h1>Dashboard</h1>
-        <form action="" onSubmit={onSubmitHandler}> 
-            <label htmlFor="">Symptoms</label>
+      <h1>Consult your <span>Diagnosis</span></h1>
+        <form action="" className='symptoms_form' onSubmit={onSubmitHandler}> 
+            <label htmlFor="">Select Your Symptoms</label>
             <select name="" id="" value={formData.symptom} onChange={onChangeHandler}>
             {isLoading ? <option>Loading...</option> : 
             symptoms.map((symptom)=>{
@@ -48,9 +41,9 @@ function Dashboard() {
                 )
             })}
             </select>
-            <button type='submit'>Submit</button>
+            <button type='submit' className='button btn_submit'>Submit</button>
         </form>
-      <button onClick={logout}>Logout</button>
+        <IssueContainer/>
     </div>
   );
 }

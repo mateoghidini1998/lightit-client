@@ -4,4 +4,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+    background-image: url('../../assets/images/team-young-specialist-doctors-standing-corridor-hospital.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.auth-container h1{
+    font-size: 2em !important;
+    color: #fff;
 }
