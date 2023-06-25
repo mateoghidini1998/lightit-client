@@ -44,6 +44,20 @@ export const createUserDiagnose = createAsyncThunk(
   }
 );
 
+export const deleteUserDiagnose = createAsyncThunk(
+  'userDiagnose/deleteUserDiagnose',
+  async (diagnose_id, { rejectWithValue }) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:8000/api/userdiagnose/${diagnose_id}`
+      );
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 export const userDiagnoseSlice = createSlice({
   name: 'userDiagnose',
   initialState,
@@ -71,6 +85,20 @@ export const userDiagnoseSlice = createSlice({
     builder.addCase(getUserDiagnosis.rejected, (state) => {
       state.isLoading = false;
       state.userDiagnoses = [];
+    });
+    builder.addCase(deleteUserDiagnose.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(deleteUserDiagnose.fulfilled, (state, action) => {
+      state.isLoading = false;
+      const deletedDiagnosisId = action.meta.arg;
+      state.userDiagnoses = state.userDiagnoses.filter(
+        (diagnose) => diagnose.id !== deletedDiagnosisId
+      );
+    });
+    builder.addCase(deleteUserDiagnose.rejected, (state) => {
+      state.isLoading = false;
+      state.userDiagnose = null;
     });
   },
 });

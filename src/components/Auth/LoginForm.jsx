@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch  } from 'react-redux';
 import FormGroup from '../UI/FormGroup';
@@ -7,7 +7,7 @@ import { loginUser } from '../../slices/authSlice';
 
 function LoginForm() {
     const dispatch = useDispatch();
-    const { isAuthenticated } = useSelector((state) => state.auth);
+    const { isAuthenticated, error } = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -15,7 +15,6 @@ function LoginForm() {
         password: "",
       });
     
-      const [formErrors, setFormErrors] = useState({});
       const { email, password } = formData;
     
       const onChange = (e) =>
@@ -42,13 +41,17 @@ function LoginForm() {
 
     const onSubmitHandler = (e) => {
       e.preventDefault();
-      console.log(formData);
       dispatch(loginUser({email, password}));
+      
     }
 
-    if(isAuthenticated) {
-      navigate('/');
-    }
+    console.log(error);
+
+    useEffect(() => {
+      if (isAuthenticated) {
+        navigate('/');
+      }
+    }, [isAuthenticated, navigate]);
 
   return (
     <form action="" className="form_container" onSubmit={(e) => onSubmitHandler(e)}>
@@ -56,6 +59,7 @@ function LoginForm() {
         <FormGroup key={field.name} {...field} />
       ))}
       <button type="submit">Login</button>
+      {error && <p style={{color: 'red'}} className="error">{error}</p>}
     </form>
   )
 }

@@ -7,7 +7,7 @@ import '../../styles/UI/FormGroup.css'
 
 function RegisterForm() {
     const dispatch = useDispatch();
-    const { isAuthenticated } = useSelector(state => state.auth)
+    const { isAuthenticated, error } = useSelector(state => state.auth)
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -93,7 +93,6 @@ function RegisterForm() {
 
     const onSubmitHandler = (e) => {
       e.preventDefault();
-      console.log(formData);
       dispatch(registerUser(formData));
     }
 
@@ -107,6 +106,7 @@ function RegisterForm() {
         <FormGroup key={field.name} {...field} />
       ))}
       <button type="submit">Register</button>
+      {error && <p style={{color: "red", fontSize: "14px", marginTop: "5px"}} className="error_msg">{error}</p>}
     </form>
   )
 }

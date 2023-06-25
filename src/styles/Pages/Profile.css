@@ -86,3 +86,19 @@
   background-color: #555555;
   color: #ffffff;
 }
+
+.delete_btn{
+  color: white;
+  background-color: red;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+.delete_btn svg{
+  stroke-width: 1px
+}

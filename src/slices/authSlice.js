@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   isLoading: false,
+  error: null,
 };
 
 export const loadUser = createAsyncThunk(
@@ -96,11 +97,12 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isAuthenticated = true;
         state.user = action.payload;
+        state.error = null;
       })
       .addCase(loadUser.rejected, (state, action) => {
         state.isLoading = false;
         state.isAuthenticated = false;
-        console.log(action.payload);
+        state.error = action.payload;
       })
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
@@ -113,12 +115,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
         state.isAuthenticated = true;
         state.user = action.payload;
-        console.log('User', action.payload);
+        state.error = null;
       })
-      .addCase(registerUser.rejected, (state) => {
+      .addCase(registerUser.rejected, (state, action) => {
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
+        state.error = action.payload;
       })
       .addCase(loginUser.pending, (state) => {
         state.isLoading = true;
@@ -129,16 +132,17 @@ export const authSlice = createSlice({
         state.isAuthenticated = true;
         console.log(state.isAuthenticated);
         state.user = action.payload;
+        state.error = null;
       })
-      .addCase(loginUser.rejected, (state) => {
+      .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
+        state.error = action.payload;
       });
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { logoutUser } = authSlice.actions;
 
 export default authSlice.reducer;
