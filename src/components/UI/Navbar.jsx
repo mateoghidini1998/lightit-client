@@ -20,7 +20,7 @@ function Navbar() {
       </li>
       
       <li>
-        <Link to="/diagnose">Diagnose</Link>
+        <Link to="/">Dashboard</Link>
       </li>      
     <li className='logout'>
     <GrLogout/>

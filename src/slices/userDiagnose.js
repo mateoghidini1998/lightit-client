@@ -9,7 +9,7 @@ const initialState = {
 
 export const getUserDiagnosis = createAsyncThunk(
   'userDiagnose/getUserDiagnosis',
-  async ({ user_id }, { rejectWithValue }) => {
+  async (user_id, { rejectWithValue }) => {
     try {
       const res = await axios.post(
         `http://localhost:8000/api/userdiagnose/${user_id}`
@@ -61,6 +61,17 @@ export const userDiagnoseSlice = createSlice({
       state.isLoading = false;
       state.userDiagnoses = [];
       state.userDiagnose = null;
+    });
+    builder.addCase(getUserDiagnosis.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getUserDiagnosis.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.userDiagnoses = action.payload;
+    });
+    builder.addCase(getUserDiagnosis.rejected, (state) => {
+      state.isLoading = false;
+      state.userDiagnoses = [];
     });
   },
 });
