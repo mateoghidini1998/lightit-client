@@ -16,14 +16,14 @@ function Navbar() {
   const authLinks = (
     <ul>
       <li>
-        <Link to="/profile">Profile</Link>
+        <Link to="/profile">Diagnostic History</Link>
       </li>
       
       <li>
         <Link to="/diagnose">Diagnose</Link>
       </li>      
     <li className='logout'>
-    <i><GrLogout/></i>
+    <GrLogout/>
     <button onClick={logout}>Logout</button>
     </li>      
   </ul>
@@ -33,12 +33,14 @@ function Navbar() {
   const guestLinks = (
     <ul>      
       <li>
+        <Link to="/">Home</Link>
+      </li>      
+      <li>
         <Link to="/register">Register</Link>
       </li>
       <li>
         <Link to="/login">Login</Link>
       </li>
-      
     </ul>
   )
 

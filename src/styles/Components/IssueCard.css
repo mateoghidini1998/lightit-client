@@ -1,6 +1,6 @@
 .card_container{
     width: 350px;
-    height: 300px;
+    height: 350px;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
@@ -9,6 +9,12 @@
     padding: 15px;
     margin: 10px;
     background-color: #fff;
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.card_container:hover{
+    transform: scale(1.08);
 }
 
 .card_container.low {
@@ -101,4 +107,38 @@
 
 .accuracy{
     color: #fff;
+}
+
+.accept_button{
+    border: 2px solid #0081cf;
+    background-color: transparent !important;
+    padding: 4px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-weight: 700;
+    margin-top: 20px;
+    width: 100px;
+
+
+}
+
+.accept_button svg{
+    fill:#0081cf;
+    stroke: 2px;
+    
+}
+
+.accept_button:hover{
+    border: none;
+    background-color: #0081cf !important;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.accept_button:hover svg{
+    fill: #fff;
+    transition: transform 0.3s ease;
 }

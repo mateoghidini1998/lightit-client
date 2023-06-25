@@ -5,14 +5,26 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    
+}
+
+.symptoms_form_container{
+    height: 50%;
     background-image: url('../../assets/images/nurses-wearing-face-masks-side-view.jpg');
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .btn_submit{
     background-color: #0081cf !important;
+    width: 100px !important;
+    border: none !important;
 }
 
 .symptoms_form select{
@@ -26,7 +38,7 @@
   
   .symptoms_form label{
     margin-bottom: 10px;
-    color: #ccc;
+    color: black;
     font-weight: 600;
   }
 

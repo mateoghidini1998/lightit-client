@@ -4,11 +4,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.7rem 2rem;
-    z-index: 1;
+    z-index: 8;
     height: 7.5%;
     width: 100%;
     opacity: 0.9;
     background-color: #000;
+    
   }
   
   .navbar ul {
@@ -31,6 +32,12 @@
     color: #fff;
   }
 
-  li.logout i svg path{
+  li.logout svg path{
     color: #fff;
+    stroke: #fff;
+    
+  }
+
+  li.logout svg{
+    margin-right: 5px;
   }

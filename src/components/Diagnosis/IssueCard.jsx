@@ -1,11 +1,12 @@
 import React from 'react'
 import '../../styles/Components/IssueCard.css'
+import { GiConfirmed } from 'react-icons/gi'
 
 function IssueCard({issue}) {
 
     const name = issue[0].Name
     const profesionalName = issue[0].ProfName
-    const accuracy = issue[0].Accuracy
+    const accuracy = issue[0].Accuracy.toFixed(1)
     const specialisations = issue[1].map((specialisation) => (
         <p key={specialisation.ID}>{specialisation.Name}</p>
       ));
@@ -37,6 +38,7 @@ function IssueCard({issue}) {
                 <span className={'accuracy'}>{accuracy}%</span>
             </div>
         </div>
+        <button className='accept_button' type='submit'>Confirm <GiConfirmed/></button>
     </div>
   )
 }

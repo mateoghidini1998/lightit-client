@@ -7,15 +7,14 @@ import IssueContainer from '../components/Diagnosis/IssueContainer'
 function Dashboard() {
   const dispatch = useDispatch();
   const { symptoms, isLoading } = useSelector((state) => state.diagnosis);
-  const { user } = useSelector((state) => state.auth); 
-  
+
   const [ formData, setFormData ] = useState({
-    symptom: ''
+    symptoms: null
   }); 
 
   const onChangeHandler = (e) => {
-    const selectedSymptom = e.target.value;
-    setFormData({ ...formData, symptom: selectedSymptom });
+    const selectedSymptoms = Array.from(e.target.selectedOptions, (option) => option.value);
+    setFormData({ ...formData, symptoms: selectedSymptoms });
   };
 
   useEffect (() => {
@@ -24,25 +23,27 @@ function Dashboard() {
 
   const onSubmitHandler = (e) => {
     e.preventDefault(); 
-    dispatch(getDiagnosis({symptoms: [formData.symptom]}))
+    dispatch(getDiagnosis({symptoms: formData.symptoms}))
   } 
 
  
   return (
-    <div className="dashboard-container">  
-      <h1>Consult your <span>Diagnosis</span></h1>
-        <form action="" className='symptoms_form' onSubmit={onSubmitHandler}> 
-            <label htmlFor="">Select Your Symptoms</label>
-            <select name="" id="" value={formData.symptom} onChange={onChangeHandler}>
-            {isLoading ? <option>Loading...</option> : 
-            symptoms.map((symptom)=>{
-                return (
-                    <option value={symptom.ID} key={symptom.ID}>{symptom.Name}</option>
-                )
-            })}
-            </select>
-            <button type='submit' className='button btn_submit'>Submit</button>
-        </form>
+    <div className="dashboard-container"> 
+      <div className="symptoms_form_container">
+        <h1>Consult your <span>Diagnosis</span></h1>
+          <form action="" className='symptoms_form' onSubmit={onSubmitHandler}> 
+              <label htmlFor="">Select Your Symptoms</label>
+              <select name="" id="" value={formData.symptoms !== null ? formData.symptoms : ''} onChange={onChangeHandler} multiple>
+              {isLoading && symptoms.length === 0 ? <option>Loading...</option> : 
+              symptoms.map((symptom)=>{
+                  return (
+                      <option value={symptom.ID} key={symptom.ID}>{symptom.Name}</option>
+                  )
+              })}
+              </select>
+              <button type='submit' className='button btn_submit'>Submit</button>
+          </form>
+      </div> 
         <IssueContainer/>
     </div>
   );
