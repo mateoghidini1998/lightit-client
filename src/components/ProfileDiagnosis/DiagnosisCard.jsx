@@ -2,6 +2,7 @@ import React from 'react'
 import { MdDeleteOutline, MdHeight } from 'react-icons/md'
 import { useDispatch } from 'react-redux'
 import { deleteUserDiagnose } from '../../slices/userDiagnose'
+import useFormattedDate from '../../customHooks/useFormattedDate'
 
 function DiagnosisCard({diagnosis}) {
     const dispatch = useDispatch()
@@ -12,13 +13,7 @@ function DiagnosisCard({diagnosis}) {
         dispatch(deleteUserDiagnose(diagnosis.id))
     }
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}/${month}/${day}`;
-      };
+    const formattedDate = useFormattedDate(created_at);
 
   return (
     <div className={`card_container `}>
@@ -31,7 +26,7 @@ function DiagnosisCard({diagnosis}) {
         </div>
         <div className="issue_content">
             <label>Diagnose Date: </label>
-            <p>{formatDate(created_at)}</p>
+            <p>{formattedDate}</p>
         </div>
         <div className="specialitation_content">
             <label>Specialitations: </label>
