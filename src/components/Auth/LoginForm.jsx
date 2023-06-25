@@ -15,6 +15,7 @@ function LoginForm() {
         password: "",
       });
     
+      const [formErrors, setFormErrors] = useState({});
       const { email, password } = formData;
     
       const onChange = (e) =>

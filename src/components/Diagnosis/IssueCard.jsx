@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import '../../styles/Components/IssueCard.css'
 import { GiConfirmed } from 'react-icons/gi'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createUserDiagnose } from '../../slices/userDiagnose'
 
 function IssueCard({issue}) {
 
     const dispatch = useDispatch()
-    const [ userDiagnose, setUserDiagnose ] = useState({
-        issue_name: "",
-        issue_ProfName: "",
-        issue_accuracy: "",
-        specialisations: null 
-    })
 
     const name = issue[0].Name
     const profesionalName = issue[0].ProfName
@@ -20,6 +14,14 @@ function IssueCard({issue}) {
     const specialisations = issue[1].map((specialisation) => (
         <p key={specialisation.ID}>{specialisation.Name}</p>
       ));
+
+    const [ userDiagnose, setUserDiagnose ] = useState({
+        issue_name: name,
+        issue_ProfName: profesionalName,
+        issue_accuracy: accuracy,
+        specialisations: issue[1].map((specialisation) => specialisation.Name) 
+    })
+
 
     let accuracyVisual = ''
     if(accuracy  < 45){
@@ -31,15 +33,9 @@ function IssueCard({issue}) {
     }
 
     const onSubmitHandler = () => {
-        setUserDiagnose({
-            issue_name: name,
-            issue_ProfName: profesionalName,
-            issue_accuracy: accuracy,
-            specialisations: issue[1].map((specialisation) => specialisation.Name) 
-        })
-        dispatch(createUserDiagnose(userDiagnose))
-        
+        dispatch(createUserDiagnose(userDiagnose)) 
     }
+
     
   return (
     <div className={`card_container ${accuracyVisual}`}>

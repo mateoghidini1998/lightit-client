@@ -21,8 +21,23 @@ function RegisterForm() {
     
       const { fullname, birth_date, gender, email, password, password2 } = formData;
     
-      const onChange = (e) =>
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+      const onChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        if (type === "checkbox") {
+          if (checked) {
+            setFormData({ ...formData, [name]: [...gender, value] });
+          } else {
+            setFormData({
+              ...formData,
+              [name]: gender.filter((option) => option !== value),
+            });
+          }
+        } else {
+          setFormData({ ...formData, [name]: value });
+        }
+      } 
+    
+    
 
     const formFields = [
         {
@@ -35,12 +50,12 @@ function RegisterForm() {
         },
         {
           name: "gender",
-          type: "checkbox",
+          type: "radio",
           placeholder: "",
           label: "",
           value: formData.gender,
           onChange: onChange,
-          options: ["male", "female", "other"] 
+          options: ["male", "female"] 
         },
         {
           name: "birth_date",

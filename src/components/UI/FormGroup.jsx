@@ -5,12 +5,12 @@ function FormGroup({ label, type, name, placeholder, value, onChange, options })
   return (
     <div className='field-container'>
       <label htmlFor="">{label}</label>
-      {type === "checkbox" ? (
+      {type === "radio" ? (
         <div className='checkbox-container'>
           {options.map((option) => (
             <label key={option}>
               <input
-                type="checkbox"
+                type="radio"
                 name={name}
                 value={option}
                 checked={value.includes(option)}

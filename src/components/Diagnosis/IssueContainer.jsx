@@ -18,7 +18,6 @@ function IssueContainer() {
       }
     }
   }, [diagnosis, isLoading]);
-  console.log(issues)
 
   return (
     <div className='issues_container'>
