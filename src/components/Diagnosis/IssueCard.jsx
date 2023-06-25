@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../styles/Components/IssueCard.css'
 import { GiConfirmed } from 'react-icons/gi'
+import { useDispatch, useSelector } from 'react-redux'
+import { createUserDiagnose } from '../../slices/userDiagnose'
 
 function IssueCard({issue}) {
+
+    const dispatch = useDispatch()
+    const [ userDiagnose, setUserDiagnose ] = useState({
+        issue_name: "",
+        issue_ProfName: "",
+        issue_accuracy: "",
+        specialisations: null 
+    })
 
     const name = issue[0].Name
     const profesionalName = issue[0].ProfName
@@ -18,6 +28,17 @@ function IssueCard({issue}) {
         accuracyVisual = 'medium'
     } else if (accuracy  > 70){
         accuracyVisual = 'high'
+    }
+
+    const onSubmitHandler = () => {
+        setUserDiagnose({
+            issue_name: name,
+            issue_ProfName: profesionalName,
+            issue_accuracy: accuracy,
+            specialisations: issue[1].map((specialisation) => specialisation.Name) 
+        })
+        dispatch(createUserDiagnose(userDiagnose))
+        
     }
     
   return (
@@ -38,7 +59,7 @@ function IssueCard({issue}) {
                 <span className={'accuracy'}>{accuracy}%</span>
             </div>
         </div>
-        <button className='accept_button' type='submit'>Confirm <GiConfirmed/></button>
+        <button onClick={onSubmitHandler} className='accept_button' type=''>Confirm <GiConfirmed/></button>
     </div>
   )
 }
