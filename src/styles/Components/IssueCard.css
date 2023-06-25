@@ -51,7 +51,7 @@
 }
 
 .card_container.medium h2{
-    color: yellow;
+    color: rgb(212, 212, 29);;
 }
 
 .card_container.high h2{
@@ -98,7 +98,7 @@
 }
 
 .accuracy_container.medium{
-    background-color: yellow;
+    background-color: rgb(212, 212, 29);
 }
 
 .accuracy_container.high{

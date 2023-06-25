@@ -26,7 +26,7 @@ function IssueCard({issue}) {
     let accuracyVisual = ''
     if(accuracy  < 45){
         accuracyVisual = 'low'
-    } else if (accuracy  > 45  && accuracy < 70){
+    } else if (accuracy  >= 45  && accuracy < 70){
         accuracyVisual = 'medium'
     } else if (accuracy  > 70){
         accuracyVisual = 'high'
