@@ -5,18 +5,24 @@ import { deleteUserDiagnose } from '../../slices/userDiagnose'
 import useFormattedDate from '../../customHooks/useFormattedDate'
 
 function DiagnosisCard({diagnosis}) {
+
     const dispatch = useDispatch()
+
+    //Destructure Diagnosis
     const { issue_name, issue_accuracy, issue_ProfName, specialisations, created_at  } = diagnosis
+    
+    //Conver Specialisations into an array
     const specialisationsList = JSON.parse(specialisations)
 
     const onDeleteHandler = () => {
         dispatch(deleteUserDiagnose(diagnosis.id))
     }
 
+    //Format Date
     const formattedDate = useFormattedDate(created_at);
 
   return (
-    <div className={`card_container `}>
+    <div className={`card_container diagnose_card `}>
         <div className="issue_heading">
             <h2>{issue_name}</h2>
         </div>

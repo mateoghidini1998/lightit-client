@@ -25,7 +25,10 @@
     
   }
   
-
+  .diagnosis-card {
+    max-width: 300px; 
+    width: 100%;
+  }
 
   .profile_info_card span {
     font-size: 16px;
@@ -39,14 +42,13 @@
 
   .diagnosis-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px; 
-    width: 80%;
+    gap: 10px;
+    width: 100%;
     margin: auto;
     max-height: 800px;
     justify-items: center;
-    align-items: center; 
-}
+    align-items: start; 
+  }
 
   .pagination {
   margin-top: 20px;
@@ -87,6 +89,8 @@
   color: #ffffff;
 }
 
+
+
 .delete_btn{
   color: white;
   background-color: red;
@@ -96,9 +100,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 5px;
   
 }
 
 .delete_btn svg{
   stroke-width: 1px
+}
+
+@media (min-width: 768px) {
+  .diagnosis-container {
+    justify-content: center;
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .diagnosis-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

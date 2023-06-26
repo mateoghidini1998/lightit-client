@@ -18,11 +18,9 @@ function RegisterForm() {
         password: "",
         password2: "",
       });
-    
-      const { fullname, birth_date, gender, email, password, password2 } = formData;
-    
-      const onChange = (e) => {
-        const { name, value, type, checked } = e.target;
+        
+    const onChange = (e) => {
+      const { name, value, type, checked } = e.target;
         if (type === "checkbox") {
           if (checked) {
             setFormData({ ...formData, [name]: [...gender, value] });
@@ -34,8 +32,8 @@ function RegisterForm() {
           }
         } else {
           setFormData({ ...formData, [name]: value });
-        }
-      } 
+      }
+    } 
     
     
 
@@ -91,10 +89,10 @@ function RegisterForm() {
         }
     ]
 
-    const onSubmitHandler = (e) => {
-      e.preventDefault();
-      dispatch(registerUser(formData));
-    }
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(registerUser(formData));
+  }
 
   if(isAuthenticated){
     navigate("/");

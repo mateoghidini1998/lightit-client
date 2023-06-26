@@ -5,22 +5,28 @@ import { getDiagnosis, getSymptoms } from '../slices/diagnosisSlice';
 import IssueContainer from '../components/Diagnosis/IssueContainer'
 
 function Dashboard() {
+
   const dispatch = useDispatch();
+
+  
   const { symptoms, isLoading } = useSelector((state) => state.diagnosis);
 
   const [ formData, setFormData ] = useState({
     symptoms: null
   }); 
 
+  //Handle Symptoms Select
   const onChangeHandler = (e) => {
     const selectedSymptoms = Array.from(e.target.selectedOptions, (option) => option.value);
     setFormData({ ...formData, symptoms: selectedSymptoms });
   };
 
+  //Fetch Symptoms List
   useEffect (() => {
     dispatch(getSymptoms());
   }, [])
 
+  //Handle Submit with an array of Symptoms
   const onSubmitHandler = (e) => {
     e.preventDefault(); 
     dispatch(getDiagnosis({symptoms: formData.symptoms}))

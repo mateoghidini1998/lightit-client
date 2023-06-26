@@ -18,10 +18,12 @@ function Profile() {
     const { user } = useSelector(state => state.auth)
     const { userDiagnoses, isLoading } = useSelector(state => state.userDiagnose)
 
+    //Get diagnoses for logged in user
     useEffect(() => {
         dispatch(getUserDiagnosis(user.id))
     }, [])
 
+    //Destructure UsePagination
     const { currentPage, currentItems, totalPages, handlePageChange } = usePagination(userDiagnoses, 3);
 
   return (

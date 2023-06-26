@@ -92,3 +92,13 @@
     justify-content: space-between;
   }
 }
+
+@media screen and (max-width: 1000px){
+  .card h2{
+    font-size: 1em;
+  }
+
+  .card p{
+    font-size: 14px;
+  }
+}
