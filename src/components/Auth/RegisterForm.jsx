@@ -89,9 +89,9 @@ function RegisterForm() {
         }
     ]
 
-    const onSubmitHandler = (e) => {
+    const onSubmitHandler = async (e) => {
       e.preventDefault();
-      dispatch(registerUser(formData));
+      await dispatch(registerUser(formData));
     };
 
     useEffect(() => {

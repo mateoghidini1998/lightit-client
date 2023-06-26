@@ -12,16 +12,18 @@ const initialState = {
 
 export const loadUser = createAsyncThunk(
   'auth/loadUser',
-  async (_, { rejectWithValue }) => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
-
+  async (_, { getState, rejectWithValue }) => {
     try {
-      const res = await axios.get('http://localhost:8000/api/auth/me');
-      return res.data;
+      const { access_token } = getState().auth;
+      if (access_token) {
+        setAuthToken(access_token);
+        const res = await axios.get('http://localhost:8000/api/auth/me');
+        return res.data;
+      } else {
+        throw new Error('No access token found');
+      }
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -42,7 +44,7 @@ export const registerUser = createAsyncThunk(
         body,
         config
       );
-      dispatch(loadUser(res.data));
+      dispatch(loadUser());
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
@@ -107,10 +109,8 @@ export const authSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.access_token = localStorage.setItem(
-          'token',
-          action.payload.access_token
-        );
+        localStorage.setItem('token', action.payload.access_token);
+        state.access_token = action.payload.access_token;
         state.isLoading = false;
         state.isAuthenticated = true;
         state.user = action.payload;

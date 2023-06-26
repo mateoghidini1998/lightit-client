@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 //Redux
 import { useSelector, useDispatch } from 'react-redux'
 import { getUserDiagnosis } from '../slices/userDiagnose'
+import { loadUser } from '../slices/authSlice'
 import '../styles/Pages/Profile.css'
 
 import ProfileCard from '../components/ProfileDiagnosis/ProfileCard'
@@ -22,6 +23,10 @@ function Profile() {
     useEffect(() => {
         dispatch(getUserDiagnosis(user.id))
     }, [])
+
+    useEffect(() => {
+        dispatch(loadUser());
+      }, []);
 
     //Destructure UsePagination
     const { currentPage, currentItems, totalPages, handlePageChange } = usePagination(userDiagnoses, 3);
