@@ -19,10 +19,19 @@
     color: #0081cf;
   }
 
-  .profile_info_card h1 {
+  .profile_info_card h1{
+    color: #888888;
+    font-size: 14px !important;
+  }
+
+  .profile_info_card h1 span {
     font-size: 24px;
     margin-bottom: 10px;
     
+  }
+
+  .profile_info_card .label{
+    font-weight: 700;
   }
   
   .diagnosis-card {
@@ -32,7 +41,7 @@
 
   .profile_info_card span {
     font-size: 16px;
-    color: #555555;
+    color: black;
   }
   
   .profile_info_card p {

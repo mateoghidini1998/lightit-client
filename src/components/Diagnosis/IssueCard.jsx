@@ -3,6 +3,7 @@ import '../../styles/Components/IssueCard.css'
 import { GiConfirmed } from 'react-icons/gi'
 import { useDispatch } from 'react-redux'
 import { createUserDiagnose } from '../../slices/userDiagnose'
+import { toggleSaveSuccess } from '../../slices/uiSlice'
 
 function IssueCard({issue}) {
 
@@ -34,6 +35,7 @@ function IssueCard({issue}) {
 
     const onSubmitHandler = () => {
         dispatch(createUserDiagnose(userDiagnose)) 
+        dispatch(toggleSaveSuccess())
     }
 
     

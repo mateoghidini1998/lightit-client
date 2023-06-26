@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import '../../styles/Components/IssuesContainer.css'
 import IssueCard from './IssueCard';
 import usePagination from '../../customHooks/usePagination';
 import Pagination from '../UI/Pagination';
+import Success from '../UI/Success';
+import { toggleSaveSuccess } from '../../slices/uiSlice';
 
 function IssueContainer() {
   const { diagnosis, isLoading } = useSelector((state) => state.diagnosis);
   const [issues, setIssues] = useState([]);
   const [loadingMessage, setLoadingMessage] = useState('');
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(toggleSaveSuccess(false));
+
     if (isLoading) {
       setLoadingMessage('Loading...');
     } else {
@@ -19,9 +25,9 @@ function IssueContainer() {
         setIssues(diagnosis.map((item) => [item.Issue, item.Specialisation]));
       }
     }
-  }, [diagnosis, isLoading]);
+  }, [diagnosis, isLoading, dispatch]);
 
-  //Destructure UsePagination
+  // Destructure UsePagination
   const { currentPage, currentItems, totalPages, handlePageChange } = usePagination(issues, 3);
 
   return (
@@ -30,16 +36,17 @@ function IssueContainer() {
         {loadingMessage ? (
           <h1 className='title loader'>{loadingMessage}</h1>
         ) : issues.length > 0 ? (
-          currentItems.map((issue) => (
-            <IssueCard key={issue.ID} issue={issue} />
+          currentItems.map((issue, index) => (
+            <IssueCard key={issue.ID || index} issue={issue} />
           ))
         ) : (
-          <p>No issues found.</p>
+          <h1 className='title loader'>No issues found...</h1>
         )}
       </div>
       <div className='pagination_container'>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
+      <Success />
     </div>
   );
 }

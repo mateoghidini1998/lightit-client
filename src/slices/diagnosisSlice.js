@@ -54,7 +54,6 @@ export const diagnosisSlice = createSlice({
       .addCase(getSymptoms.fulfilled, (state, action) => {
         state.isLoading = false;
         state.symptoms = action.payload;
-        console.log(state.symptoms);
       })
       .addCase(getSymptoms.rejected, (state, action) => {
         state.isLoading = false;

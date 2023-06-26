@@ -52,7 +52,8 @@ function LoginForm() {
         <FormGroup key={field.name} {...field} />
       ))}
       <button type="submit">Login</button>
-      {error && <p style={{ color: 'red' }} className="error">{error}</p>}
+      {error && <p style={{ color: 'red', marginTop: '10px' }} className="error">{error.message}</p>}
+
     </form>
   );
 }

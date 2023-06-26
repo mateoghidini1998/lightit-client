@@ -5,7 +5,7 @@ import setAuthToken from '../utils/setAuthToken';
 const initialState = {
   access_token: localStorage.getItem('token'),
   isAuthenticated: false,
-  user: null,
+  user: {},
   isLoading: false,
   error: null,
 };
@@ -13,9 +13,7 @@ const initialState = {
 export const loadUser = createAsyncThunk(
   'auth/loadUser',
   async (_, { rejectWithValue }) => {
-    if (localStorage.token) {
-      setAuthToken(localStorage.token);
-    }
+    setAuthToken(localStorage.token);
 
     try {
       const res = await axios.get('http://localhost:8000/api/auth/me');
