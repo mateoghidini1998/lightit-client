@@ -14,7 +14,7 @@ function App() {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <h1 className='title loader'>Loading...</h1>;
   }
 
   return (

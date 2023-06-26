@@ -11,14 +11,20 @@ function IssueContainer() {
   const { diagnosis, isLoading } = useSelector((state) => state.diagnosis);
   const [issues, setIssues] = useState([]);
   const [loadingMessage, setLoadingMessage] = useState('');
+  let saveSuccess = useSelector((state) => state.ui.saveSuccess);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(toggleSaveSuccess(false));
+    saveSuccess = false;
+
+    if(issues.length <= 0){
+      saveSuccess = false
+    }
 
     if (isLoading) {
       setLoadingMessage('Loading...');
+      dispatch(toggleSaveSuccess(false))
     } else {
       setLoadingMessage('');
       if (diagnosis) {
