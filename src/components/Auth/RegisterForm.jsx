@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch  } from 'react-redux';
 import { registerUser } from '../../slices/authSlice';
@@ -89,14 +89,17 @@ function RegisterForm() {
         }
     ]
 
-  const onSubmitHandler = (e) => {
-    e.preventDefault();
-    dispatch(registerUser(formData));
-  }
+    const onSubmitHandler = (e) => {
+      e.preventDefault();
+      dispatch(registerUser(formData));
+    };
 
-  if(isAuthenticated){
-    navigate("/");
-  }
+    useEffect(() => {
+      if (isAuthenticated) {
+        navigate('/');
+      }
+    }, [isAuthenticated, navigate]);
+
 
   return (
     <form action="" className="form_container" onSubmit={(e) => onSubmitHandler(e)}>
@@ -104,7 +107,7 @@ function RegisterForm() {
         <FormGroup key={field.name} {...field} />
       ))}
       <button type="submit">Register</button>
-      {error && <p style={{color: "red", fontSize: "14px", marginTop: "5px"}} className="error_msg">{error}</p>}
+      {error && <p style={{ color: 'red', marginTop: '10px' }} className="error">{error.message}</p>}
     </form>
   )
 }

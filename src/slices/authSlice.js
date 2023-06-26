@@ -13,7 +13,9 @@ const initialState = {
 export const loadUser = createAsyncThunk(
   'auth/loadUser',
   async (_, { rejectWithValue }) => {
-    setAuthToken(localStorage.token);
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
 
     try {
       const res = await axios.get('http://localhost:8000/api/auth/me');
@@ -40,8 +42,7 @@ export const registerUser = createAsyncThunk(
         body,
         config
       );
-      dispatch(loadUser(user));
-      console.log(res.data);
+      dispatch(loadUser(res.data));
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data.message);
