@@ -22,3 +22,9 @@
     display: none;
 }
 
+.close_btn{
+    color:white;
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+}

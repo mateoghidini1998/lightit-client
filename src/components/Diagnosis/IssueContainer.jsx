@@ -4,6 +4,7 @@ import '../../styles/Components/IssuesContainer.css'
 import IssueCard from './IssueCard';
 import usePagination from '../../customHooks/usePagination';
 import Pagination from '../UI/Pagination';
+import Success from '../UI/Success'
 
 function IssueContainer() {
   const { diagnosis, isLoading } = useSelector((state) => state.diagnosis);
@@ -42,6 +43,7 @@ function IssueContainer() {
       <div className='pagination_container'>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
+      <Success/>
     </div>
   );
 }
