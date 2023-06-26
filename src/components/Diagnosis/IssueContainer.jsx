@@ -4,27 +4,17 @@ import '../../styles/Components/IssuesContainer.css'
 import IssueCard from './IssueCard';
 import usePagination from '../../customHooks/usePagination';
 import Pagination from '../UI/Pagination';
-import Success from '../UI/Success';
-import { toggleSaveSuccess } from '../../slices/uiSlice';
 
 function IssueContainer() {
   const { diagnosis, isLoading } = useSelector((state) => state.diagnosis);
   const [issues, setIssues] = useState([]);
   const [loadingMessage, setLoadingMessage] = useState('');
-  let saveSuccess = useSelector((state) => state.ui.saveSuccess);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    saveSuccess = false;
-
-    if(issues.length <= 0){
-      saveSuccess = false
-    }
-
     if (isLoading) {
       setLoadingMessage('Loading...');
-      dispatch(toggleSaveSuccess(false))
     } else {
       setLoadingMessage('');
       if (diagnosis) {
@@ -52,7 +42,6 @@ function IssueContainer() {
       <div className='pagination_container'>
         <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
       </div>
-      <Success />
     </div>
   );
 }
